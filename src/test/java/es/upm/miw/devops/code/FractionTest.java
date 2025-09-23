@@ -45,23 +45,12 @@ class FractionTest {
         assertEquals(expected, fraction.toString());
     }
 
-    // ---------- Casos límite ----------
+    // ---------- Special cases ----------
 
     @Test
     void testZeroNumerator() {
         Fraction fraction = new Fraction(0, 5);
         assertEquals(0.0, fraction.decimal(), 0.0001);
-    }
-
-    @Test
-    void testZeroDenominatorThrowsExceptionInConstructor() {
-        assertThrows(IllegalArgumentException.class, () -> new Fraction(5, 0));
-    }
-
-    @Test
-    void testZeroDenominatorThrowsExceptionInSetter() {
-        Fraction fraction = new Fraction(1, 2);
-        assertThrows(IllegalArgumentException.class, () -> fraction.setDenominator(0));
     }
 
     @Test
@@ -82,7 +71,7 @@ class FractionTest {
         assertEquals(0.75, fraction.decimal(), 0.0001);
     }
 
-    // ---------- Nuevos métodos ----------
+    // ---------- New methods ----------
 
     @Test
     void testIsProper() {

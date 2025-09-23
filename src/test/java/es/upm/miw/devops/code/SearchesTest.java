@@ -24,35 +24,11 @@ class SearchesTest {
                 .containsExactly("López", "Torres");
     }
 
+    /* Issue #11 - Function 5 */
     @Test
-    void testFindUserIdByAnyProperFraction() {
-        assertThat(new Searches().findUserIdByAnyProperFraction().toList())
-                .containsExactly("2", "3", "5");
+    void testFindUserIdByAllProperFraction() {
+        assertThat(new Searches().findUserIdByAllProperFraction().toList())
+                .containsExactly("1", "2", "3", "5"); // Ordering attending to UsersDatabase
     }
 
-    /*
-    void testFindUserIdByAnyProperFraction() {
-    }
-
-    void testFindUserNameByAnyImproperFraction() {
-    }
-
-    void testFindUserFamilyNameByAllSignFractionDistinct() {
-    }
-
-    void testFindDecimalFractionByUserName() {
-    }
-
-    void testFindDecimalFractionBySignFraction() {
-    }
-
-    void testFindFractionAdditionByUserId() {
-    }
-
-    void testFindFractionSubtractionByUserName() {
-    }
-
-    void testFindFractionMultiplicationByUserFamilyName() {
-    }
-    */
 }
