@@ -28,74 +28,14 @@ public class Searches {
                 .map(User::getFamilyName);
     }
 
-    public Stream<String> findUserFamilyNameInitialByAnyProperFraction() {
-        return Stream.empty();
-    }
-
-    public Stream<String> findUserIdByAnyProperFraction() {
-        return Stream.empty();
-    }
-
-    public Fraction findFractionMultiplicationByUserFamilyName(String familyName) {
-        return null;
-    }
-
-    public Fraction findFirstFractionDivisionByUserId(String id) {
-        return null;
-    }
-
-    public Double findFirstDecimalFractionByUserName(String name) {
-        return null;
-    }
-
-/*  Issue #11 - Function 5 */
+    /* Issue #11 - Function 5 */
     public Stream<String> findUserIdByAllProperFraction() {
-
         return new UsersDatabase().findAll()
-                .filter(user -> user.getFractions()
-                        .stream()
-                        .anyMatch(Fraction::isProper)) // at least one ProperFraction
+                .filter(user -> user.getFractions().stream()
+                        .filter(f -> f.getDenominator() != 0) // Avoid dividing by 0
+                        .anyMatch(Fraction::isProper)                 // Check if is a properFraction
+                )
                 .map(User::getId);
-    }
-
-    public Stream<Double> findDecimalImproperFractionByUserName(String name) {
-        return Stream.empty();
-    }
-
-    public Fraction findFirstProperFractionByUserId(String id) {
-        return null;
-    }
-
-    public Stream<String> findUserFamilyNameByImproperFraction() {
-        return Stream.empty();
-    }
-
-    public Fraction findHighestFraction() {
-        return null;
-    }
-
-    public Stream<String> findUserNameByAnyImproperFraction() {
-        return Stream.empty();
-    }
-
-    public Stream<String> findUserFamilyNameByAllNegativeSignFractionDistinct() {
-        return Stream.empty();
-    }
-
-    public Stream<Double> findDecimalFractionByUserName(String name) {
-        return Stream.empty();
-    }
-
-    public Stream<Double> findDecimalFractionByNegativeSignFraction() {
-        return Stream.empty();
-    }
-
-    public Fraction findFractionAdditionByUserId(String id) {
-        return null;
-    }
-
-    public Fraction findFirstFractionSubtractionByUserName(String name) {
-        return null;
     }
 
 }
