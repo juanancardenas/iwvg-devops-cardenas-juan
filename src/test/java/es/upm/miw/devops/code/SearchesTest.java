@@ -31,4 +31,22 @@ class SearchesTest {
                 .containsExactly("1", "2", "3", "5"); // Ordering attending to UsersDatabase
     }
 
+    /* Issue #12 - Function 4 */
+    @Test
+    void testFindFirstDecimalFractionByUserName_withAna() {
+        assertThat(new Searches().findFirstDecimalFractionByUserName("Ana"))
+                .isEqualTo(-0.2);
+    }
+
+    @Test
+    void testFindFirstDecimalFractionByUserName_withOscar() {
+        assertThat(new Searches().findFirstDecimalFractionByUserName("Oscar"))
+                .isEqualTo(0.2);
+    }
+
+    @Test
+    void testFindFirstDecimalFractionByUserName_withPaula() {
+        assertThat(new Searches().findFirstDecimalFractionByUserName("Paula"))
+                .isNull();
+    }
 }

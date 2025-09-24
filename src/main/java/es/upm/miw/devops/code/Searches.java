@@ -38,4 +38,17 @@ public class Searches {
                 .map(User::getId);
     }
 
+    /* Issue #12 - Function 4 */
+    public Double findFirstDecimalFractionByUserName(String name) {
+        return new UsersDatabase().findAll()
+                .filter(user -> name.equals(user.getName()))
+                .flatMap(user -> user.getFractions().stream())
+                .filter(Objects::nonNull)
+                .filter(f -> f.getDenominator() != 0) // Avoid dividing by 0
+                .filter(f -> Math.abs(f.getNumerator()) % Math.abs(f.getDenominator()) != 0) // Check if it is decimal
+                .map(Fraction::decimal)
+                .findFirst()
+                .orElse(null);
+    }
+
 }
