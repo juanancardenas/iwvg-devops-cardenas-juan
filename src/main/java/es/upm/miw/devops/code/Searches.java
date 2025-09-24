@@ -51,4 +51,15 @@ public class Searches {
                 .orElse(null);
     }
 
+    /* Issue #13 - Function 6 */
+    public Stream<Double> findDecimalImproperFractionByUserName(String name) {
+        return new UsersDatabase().findAll()
+                .filter(user -> name.equals(user.getName()))
+                .flatMap(user -> user.getFractions().stream())
+                .filter(Objects::nonNull)
+                .filter(f -> f.getDenominator() != 0) // Avoid dividing by 0
+                .filter(f -> Math.abs(f.getNumerator()) % Math.abs(f.getDenominator()) != 0) // Check if it is decimal
+                .filter(Fraction::isImproper) // Check the fraction is improper
+                .map(Fraction::decimal);
+    }
 }
