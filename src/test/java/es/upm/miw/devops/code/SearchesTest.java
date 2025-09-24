@@ -33,13 +33,20 @@ class SearchesTest {
 
     /* Issue #12 - Function 4 */
     @Test
-    void testFindFirstDecimalFractionByUserName() {
-        // Ana → decimal first fraction is -1/5 = -0.2
+    void testFindFirstDecimalFractionByUserName_withAna() {
         assertThat(new Searches().findFirstDecimalFractionByUserName("Ana"))
                 .isEqualTo(-0.2);
+    }
 
-        // Oscar (id=1) → No any decimal fraction → null
+    @Test
+    void testFindFirstDecimalFractionByUserName_withOscar() {
         assertThat(new Searches().findFirstDecimalFractionByUserName("Oscar"))
+                .isEqualTo(0.2);
+    }
+
+    @Test
+    void testFindFirstDecimalFractionByUserName_withPaula() {
+        assertThat(new Searches().findFirstDecimalFractionByUserName("Paula"))
                 .isNull();
     }
 }
