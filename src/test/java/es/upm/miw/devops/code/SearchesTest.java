@@ -1,7 +1,7 @@
 package es.upm.miw.devops.code;
 
 import org.junit.jupiter.api.Test;
-
+import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SearchesTest {
@@ -90,5 +90,32 @@ class SearchesTest {
         // Ninguna impropia decimal
         assertThat(new Searches().findDecimalImproperFractionByUserName("Antonio").toList())
                 .isEmpty();
+    }
+
+    /* Issue #14 - Function B */
+    @Test
+    void testFindUserFamilyNameByAllNegativeSignFractionDistinct_expectedBlancoLopez() {
+        // According to UsersDatabase:
+        // - Ana Blanco has the fraction -1/5
+        // - Oscar López has the fraction 3/-6
+        assertThat(new Searches().findUserFamilyNameByAllNegativeSignFractionDistinct().toList())
+                .containsExactly("Blanco", "López");
+    }
+
+    @Test
+    void testFindUserFamilyNameByAllNegativeSignFractionDistinct_noFernandezNoTorres() {
+        // Either Oscar Fernandez (all fractions positives) or
+        // Paula Torres (none a negative fraction) must appear
+        assertThat(new Searches().findUserFamilyNameByAllNegativeSignFractionDistinct().toList())
+                .doesNotContain("Fernandez", "Torres");
+    }
+
+    @Test
+    void testFindUserFamilyNameByAllNegativeSignFractionDistinct_distinctness() {
+        List<String> result = new Searches().findUserFamilyNameByAllNegativeSignFractionDistinct().toList();
+
+        // Checking there are no duplicates
+        long distinctCount = result.stream().distinct().count();
+        assertThat(result).hasSize((int) distinctCount);
     }
 }
