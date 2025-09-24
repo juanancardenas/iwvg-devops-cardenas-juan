@@ -62,4 +62,15 @@ public class Searches {
                 .filter(Fraction::isImproper) // Check the fraction is improper
                 .map(Fraction::decimal);
     }
+
+    /* Issue #14 - Function B */
+    public Stream<String> findUserFamilyNameByAllNegativeSignFractionDistinct() {
+        return new UsersDatabase().findAll()
+                .filter(user -> user.getFractions().stream()
+                        .filter(fraction -> fraction.getDenominator() != 0) // Avoid dividing by 0
+                        .anyMatch(fraction -> fraction.decimal() < 0)
+                )
+                .map(User::getFamilyName)
+                .distinct();
+    }
 }
