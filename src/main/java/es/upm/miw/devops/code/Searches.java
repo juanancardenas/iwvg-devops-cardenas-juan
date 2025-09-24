@@ -60,7 +60,7 @@ public class Searches {
                 .filter(f -> f.getDenominator() != 0) // Avoid dividing by 0
                 .filter(f -> Math.abs(f.getNumerator()) % Math.abs(f.getDenominator()) != 0) // Check if it is decimal
                 .filter(Fraction::isImproper) // Check the fraction is improper
-                .map(Fraction::decimal);
+                .map(Fraction::decimal); //BUG #15
     }
 
     /* Issue #14 - Function B */
